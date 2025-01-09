@@ -1,0 +1,20 @@
+eureka:
+  client:
+    serviceURL:
+      defaultZone: http://localhost:6001/MS-Eureka
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: GestionUtilisateursBenAliYasmine
+          uri: lb://GestionUtilisateursBenAliYasmine
+          predicates:
+            - Path=/GestionUtilisateursBenAliYasmine/**
+          filters:
+            - RewritePath=/GestionUtilisateursBenAliYasmine/(?<path>.*), /${path}
+        - id: GestionAbonnementBenAliYasmine
+          uri: lb://GestionAbonnementBenAliYasmine
+          predicates:
+            - Path=/GestionAbonnementBenAliYasmine/**
+          filters:
+            - RewritePath=/GestionAbonnementBenAliYasmine/(?<path>.*), /${path}
